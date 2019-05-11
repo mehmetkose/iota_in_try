@@ -8,16 +8,18 @@ class App extends Component {
     balanceInIOTA: 0,
     balanceInTRY: 0
   };
-  async componentDidMount() {
-    await this.fetchBinanceTicker();
-    await this.fetchBTCTURKTicker();
+  componentDidMount() {
+    this.timer = setInterval(() => {
+      this.fetchBinanceTicker();
+      this.fetchBTCTURKTicker();
+    }, 2000);
   }
   async fetchBinanceTicker() {
     const response = await fetch(
       "https://cors-anywhere.herokuapp.com/https://api.binance.com/api/v3/ticker/price"
     );
-    const priceStack = await response.json();
-    priceStack
+    const prices = await response.json();
+    prices
       .filter(pair => pair.symbol === "IOTAUSDT")
       .map(pair => {
         return this.setState({ IOTAUSDT: pair.price });
