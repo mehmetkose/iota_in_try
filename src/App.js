@@ -16,7 +16,7 @@ class App extends Component {
   }
   async fetchBinanceTicker() {
     const response = await fetch(
-      "https://cors-anywhere.herokuapp.com/https://api.binance.com/api/v3/ticker/price"
+      "https://cors-anywhere.herokuapp.com/https://api.btcturk.com/api/v2/ticker"
     );
     const prices = await response.json();
     prices
